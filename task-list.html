@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="task-list.css" rel="stylesheet">
+        <title>タスクリスト</title>
+    </head>
+
+    <body id="body">
+        <h1>期末面談用やったことリスト</h1>
+        <form id="form-area">
+            <p>実施月、進捗、タイトル、タスク概要を入力してください</p>
+            <div id="form-select">
+                <input id="select-month" type="month" required>
+                <select id="select-progress">
+                    <option value="済">済</option>
+                    <option value="進行中">進行中</option>
+                    <option value="未着手">未着手</option>
+                </select>
+                <button id="register-button" type="button" onclick="registerTask()">登録</button>
+            </div>
+            <input id="form-task-title" type="text" placeholder="タイトル" required>
+            <textarea id="form-task-summary" cols="30" rows="10" placeholder="タスクの概要" required></textarea>
+        </form>
+
+        <div id="task-area">
+            <table id="task-table">
+                <tr>
+                    <th class="table-month">実施月</th>
+                    <th class="table-progress">進捗</th>
+                    <th class="table-task-title">タイトル</th>
+                    <th class="table-task-summary">タスク概要</th>
+                    <th class="table-delete-button">削除</th>
+                </tr>
+            </table>
+        </div>
+        <script src="task-list.js"></script>
+    </body>
+
+</html>

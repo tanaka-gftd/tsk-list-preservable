@@ -1,0 +1,89 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+#body {
+  background-color: #e0edde;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  text-align: center;
+}
+
+#form-area {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#form-select {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+#select-month, #select-progress {
+  margin-right: 10px;
+}
+
+#register-button {
+  background-color: #4445f5;
+  color: #ffffff;
+  border-radius: 3px;
+}
+
+#form-task-title {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+#form-task-summary {
+  font-size: 18px;
+}
+
+#task-area {
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+}
+
+#task-area tr {
+  height: 1.8em;
+}
+
+#task-area th {
+  color: #ffffff;
+  background-color: #3d7576;
+}
+
+.table-month {
+  width: 80px;
+}
+
+.table-progress {
+  width: 60px;
+}
+
+.table-task-title {
+  width: 200px;
+}
+
+.table-task-summary {
+  width: 580px;
+}
+
+.table-delete-button {
+  width: 50px;
+}
+
+.delete-button {
+  background-color: #444444;
+  color: #ffffff;
+  border-radius: 3px;
+}
