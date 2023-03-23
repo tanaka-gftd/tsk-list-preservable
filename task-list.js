@@ -10,6 +10,9 @@ const table = document.getElementById('task-table');
 //N予備校の課題の通り、タスクの保持は配列で行うようにする
 let taskList = [];
 
+//コードを見やすくするため、ローカルストレージを変数化しておく
+const storage = localStorage;
+
 
 
 //タスクを登録＆保持する処理
@@ -88,5 +91,20 @@ function createTaskListTable() {
         cellFormText.appendChild(document.createTextNode(taskList[i].formText));
         cellFormTextarea.appendChild(document.createTextNode(taskList[i].formTextarea));
         cellDeleteButton.appendChild(deleteButton);  
+    };
+
+    //タスクをローカルストレージに保存
+    setStorage();
+};
+
+
+
+//各タスクをローカルストレージに格納していく
+//オブジェクトはローカルストレージに直接格納できないので、一旦JSON化してから格納するようにする
+//WebStorage内に保存できるのは文字列のみ、と捉えるべき
+function setStorage(){
+    for(let i = 0; i < taskList.length; i++){
+        let task = `task${i}`;
+        storage[task] = JSON.stringify(taskList[i]);
     };
 };
