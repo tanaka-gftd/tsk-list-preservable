@@ -7,14 +7,31 @@ const formText = document.getElementById('form-task-title');
 const formTextarea = document.getElementById('form-task-summary');
 const table = document.getElementById('task-table');
 
+
 //N予備校の課題の通り、タスクの保持は配列で行うようにする
 let taskList = [];
 
-//コードを見やすくするため、ローカルストレージを変数化しておく
-const storage = localStorage;
 
-//ローカルストレージから保存されているタスクの取り出し → 取り出したタスクをテーブル表示、をページ表示時に実行
-getStorage();
+//コードが見やすいように、ローカルストレージを変数に入れておく
+/* 
+    windowオブジェクトは基本的には省略できるが、
+    windowオブジェクトに対象のプロパティが存在しない場合(*)、ReferenceErrorとなるので、
+    ここでは省略せずに付けておく。
+    (* 一部ブラウザにしか実装されていない実験的な機能を使う時や、古いブラウザに対応させる時のプロパティ存在確認時など)
+*/
+let storage = window.localStorage;
+
+
+/* 
+    localStorage関連の処理を実行するのは、
+    アクセスしているブラウザが、localStorageを使える事が確認できた時のみにする。
+    (localStorageが使用できない場合は、変数storageにはundefinedが入っている)
+*/
+if(storage){
+
+    //ローカルストレージから保存されているタスクの取り出し → 取り出したタスクをテーブル表示、をページ表示時に実行
+    getStorage();
+};
 
 
 
@@ -25,9 +42,9 @@ function registerTask(){
     const task = { month:month.value, selectProgress:selectProgress.value, formText:formText.value, formTextarea:formTextarea.value };
 
     //同じタスクを連続で登録できないようにする(課題にはないが、あると便利なので追加)
-    if (taskList[taskList.length - 1]){  //念のため、配列taskListが空の時は実施しないようにする
+    if(taskList[taskList.length - 1]){  //念のため、配列taskListが空の時は実施しないようにする
         const sameCheck = taskList[taskList.length - 1];
-        if (JSON.stringify(task) === JSON.stringify(sameCheck)) {  //オブジェクトを直接比較すると、アドレス番地の比較になってしまうので、今回はJSON化してから比較する
+        if(JSON.stringify(task) === JSON.stringify(sameCheck)){  //オブジェクトを直接比較すると、アドレス番地の比較になってしまうので、今回はJSON化してから比較する
             return;
         };
     };
@@ -38,7 +55,7 @@ function registerTask(){
     //課題で指定されている通り、表示し直しのため、現在テーブル表示されているタスク一覧は一旦削除
     //最終行削除を繰り返す
     //(前回表示したものなので、配列の要素数はひとつ少ない分、-1しておく)
-    for (let i = 0; i < taskList.length - 1; i++){
+    for(let i = 0; i < taskList.length - 1; i++){
         table.deleteRow(-1);
     };
 
@@ -54,7 +71,7 @@ function deleteTask(num){
 
     //課題で指定されている通り、表示し直しのため、現在テーブル表示されているタスク一覧は一旦削除
     //最終行削除を繰り返す
-    for (let i = 0; i < taskList.length; i++){
+    for(let i = 0; i < taskList.length; i++){
         table.deleteRow(-1);
     };
     
@@ -62,8 +79,10 @@ function deleteTask(num){
     taskList.splice(num, 1);
 
     //一旦ローカルストレージの中身をクリア
-    storage.clear();
-
+    if(storage){
+		storage.clear();
+    };
+    
     //タスクをテーブル表示する関数を呼び出す(改めて、ローカルストレージへのタスクの保存も行う)
     createTaskListTable();
 };
@@ -100,7 +119,9 @@ function createTaskListTable(){
     };
 
     //タスクをローカルストレージに保存
-    setStorage();
+    if(storage){
+        setStorage();
+    };
 };
 
 
@@ -120,7 +141,6 @@ function setStorage(){
 //ローカルストレージからデータを取り出し、taskListに追加
 //そして、ローカルストレージから取り出したタスクをテーブル表示する
 function getStorage(){
-
     let i = 0;
 
     while(storage[`task${i}`]){
