@@ -61,14 +61,17 @@ function deleteTask(num){
     //taskList配列から要素を削除
     taskList.splice(num, 1);
 
-    //タスクをテーブル表示する関数を呼び出す
+    //一旦ローカルストレージの中身をクリア
+    storage.clear();
+
+    //タスクをテーブル表示する関数を呼び出す(改めて、ローカルストレージへのタスクの保存も行う)
     createTaskListTable();
 };
 
 
 
 //タスク一覧を表示するテーブルを作成する
-function createTaskListTable() {
+function createTaskListTable(){
 
     //タスクをテーブルに表示していく（テーブル内の行としては2行目から追加していくので注意）
     for(let i = 0; i < taskList.length; i++){
@@ -121,8 +124,8 @@ function getStorage(){
     let i = 0;
 
     while(storage[`task${i}`]){
-        const task = JSON.parse(storage[`task${i}`]);  //JSONをオブジェクト化する
-        taskList.push(task);
+        const taskFromStorage = JSON.parse(storage[`task${i}`]);  //JSONをオブジェクト化する
+        taskList.push(taskFromStorage);
         i++
     };
 
