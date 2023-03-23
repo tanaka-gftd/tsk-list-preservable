@@ -64,29 +64,29 @@ function deleteTask(num){
 //タスク一覧を表示するテーブルを作成する
 function createTaskListTable() {
 
-  //タスクをテーブルに表示していく（テーブル内の行としては2行目から追加していくので注意）
-  for(let i = 0; i < taskList.length; i++){
+    //タスクをテーブルに表示していく（テーブル内の行としては2行目から追加していくので注意）
+    for(let i = 0; i < taskList.length; i++){
 
-    //タスク表示用として、テーブルの最後の行の後に新規行(tr要素)を追加し、そこにセル(td要素)も追加していく
-    let newRow = table.insertRow(-1);
-    let cellMonth = newRow.insertCell(0);
-    let cellSelectProgress = newRow.insertCell(1);
-    let cellFormText = newRow.insertCell(2);
-    let cellFormTextarea = newRow.insertCell(3);
-    let cellDeleteButton = newRow.insertCell(4);
+        //タスク表示用として、テーブルの最後の行の後に新規行(tr要素)を追加し、そこにセル(td要素)も追加していく
+        let newRow = table.insertRow(-1);
+        let cellMonth = newRow.insertCell(0);
+        let cellSelectProgress = newRow.insertCell(1);
+        let cellFormText = newRow.insertCell(2);
+        let cellFormTextarea = newRow.insertCell(3);
+        let cellDeleteButton = newRow.insertCell(4);
 
-    //削除用ボタンの作成(何行目かを示す属性とonclick属性も追加しておく)
-    const deleteButton = document.createElement('button');
-    deleteButton.classList.add('delete-button');
-    deleteButton.textContent = '削除';
-    deleteButton.setAttribute('value', i);  //ここでのiが、taskList配列内のタスクのインデックスと同じ値になる
-    deleteButton.setAttribute('onclick', 'deleteTask(value)');  //value属性とid属性は、onclickにセットした関数に引数として渡せる(今回はvalueで渡す)
+        //削除用ボタンの作成(何行目かを示す属性とonclick属性も追加しておく)
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('delete-button');
+        deleteButton.textContent = '削除';
+        deleteButton.setAttribute('value', i);  //ここでのiが、taskList配列内のタスクのインデックスと同じ値になる
+        deleteButton.setAttribute('onclick', 'deleteTask(value)');  //value属性とid属性は、onclickにセットした関数に引数として渡せる(今回はvalueで渡す)
 
-    //テーブルのセル内に値を追加＆表示していく
-    cellMonth.appendChild(document.createTextNode(taskList[i].month));
-    cellSelectProgress.appendChild(document.createTextNode(taskList[i].selectProgress));
-    cellFormText.appendChild(document.createTextNode(taskList[i].formText));
-    cellFormTextarea.appendChild(document.createTextNode(taskList[i].formTextarea));
-    cellDeleteButton.appendChild(deleteButton);  
-  };
+        //テーブルのセル内に値を追加＆表示していく
+        cellMonth.appendChild(document.createTextNode(taskList[i].month));
+        cellSelectProgress.appendChild(document.createTextNode(taskList[i].selectProgress));
+        cellFormText.appendChild(document.createTextNode(taskList[i].formText));
+        cellFormTextarea.appendChild(document.createTextNode(taskList[i].formTextarea));
+        cellDeleteButton.appendChild(deleteButton);  
+    };
 };
