@@ -13,6 +13,9 @@ let taskList = [];
 //コードを見やすくするため、ローカルストレージを変数化しておく
 const storage = localStorage;
 
+//ローカルストレージから保存されているタスクの取り出し → 取り出したタスクをテーブル表示、をページ表示時に実行
+getStorage();
+
 
 
 //タスクを登録＆保持する処理
@@ -107,4 +110,22 @@ function setStorage(){
         let task = `task${i}`;
         storage[task] = JSON.stringify(taskList[i]);
     };
+};
+
+
+
+//ローカルストレージからデータを取り出し、taskListに追加
+//そして、ローカルストレージから取り出したタスクをテーブル表示する
+function getStorage(){
+
+    let i = 0;
+
+    while(storage[`task${i}`]){
+        const task = JSON.parse(storage[`task${i}`]);  //JSONをオブジェクト化する
+        taskList.push(task);
+        i++
+    };
+
+    //タスクをテーブル表示する関数を呼び出す
+    createTaskListTable();
 };
